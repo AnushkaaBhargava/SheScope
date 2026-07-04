@@ -1,0 +1,16 @@
+
+
+.featured{
+    padding:80px;
+}
+
+.featured h2{
+    margin-top:10px
+}
+
+.cards{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap
+}
