@@ -10,7 +10,7 @@ const scholarships = [
     title: "Women Tech Scholarship",
     category: "Engineering",
     amount: "₹50,000",
-    country: "India",
+    country: "USA",
     deadline: "30 Aug 2026",
   },
 
