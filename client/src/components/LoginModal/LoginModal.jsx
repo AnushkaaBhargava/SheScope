@@ -1,6 +1,8 @@
 import "./LoginModal.css";
+import { useState } from "react";
 
 export default function LoginModal({ onClose }) {
+    const[isLogin,setIsLogin]=useState(true);
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div
@@ -11,14 +13,20 @@ export default function LoginModal({ onClose }) {
           ✕
         </button>
 
-        <h1>Welcome Back 👋</h1>
+        <h1>{isLogin? "Welcome Back 👋":"Create Account" }</h1>
 
         <p className="subtitle">
-          Login to continue exploring scholarships.
+          {isLogin? "Login to continue exploring scholarships." : "Join SheScope and discover scholarships."}
         </p>
 
         <form className="auth-form">
-
+           
+           {!isLogin && (
+               <input 
+                 type="Full name"
+                 placeholder="Full name"
+                />
+           )}
           <input
             type="email"
             placeholder="Email Address"
@@ -29,17 +37,42 @@ export default function LoginModal({ onClose }) {
             placeholder="Password"
           />
 
-          <button type="submit" className="login-btn">
-            Login
-          </button>
+          {!isLogin && (
+            <input 
+               type="password"
+               placeholder="Confirm Password"
+            />
+          )}
+
+           <button type="submit" className="login-btn">
+               {isLogin ? "Login" : "Register"}
+           </button>
 
         </form>
 
         <p className="bottom-text">
-          Don't have an account?
-          <span className="register-link">
-            Register
-          </span>
+            {isLogin ? (
+                <>
+                   Don't have an account?
+                   <span className="register-link"
+                     onClick={()=>setIsLogin(false)}
+                   >
+                    Register
+                   </span>
+                </>
+                
+            ): (
+                 <>
+                Already have an account?
+
+                <span
+                   className="register-link"
+                   onClick={() => setIsLogin(true)}
+                 >
+                  Login
+                </span>
+            </> 
+            )}
         </p>
 
       </div>
