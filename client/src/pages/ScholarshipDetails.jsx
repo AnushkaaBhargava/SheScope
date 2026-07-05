@@ -107,9 +107,9 @@ export default function ScholarshipDetails(){
 
                             <p><strong>Deadline:</strong> {scholarship.deadline}</p>
 
-                            <button className="apply-btn">
-                                Apply Now
-                            </button>
+                            <Link to={`/apply/${id}`} className="apply-btn">
+                                Apply Now!
+                             </Link>
 
                         </div>
 
