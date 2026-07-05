@@ -3,11 +3,15 @@ import Hero from '../components/Hero/Hero';
 import ScholarshipCard from "../components/ScholarshipCard/ScholarshipCard";
 import scholarships from '../components/ScholarshipCard/scholarship'
 import './Home.css'
+import { useState } from "react";
+import LoginModal from "../components/LoginModal/LoginModal";
 
 export default function Home(){
+
+    const [showLogin,setShowLogin]=useState(false);
     return (
         <>
-        <Navbar/>
+        <Navbar onLoginClick={()=>setShowLogin(true)}/>
         <Hero/>
 
          <section className="featured">
@@ -15,7 +19,7 @@ export default function Home(){
            <div className="cards">
           {scholarships.map((scholarship) => (
             <ScholarshipCard
-              key={scholarship.id}
+              id={scholarship.id}
               logo={scholarship.logo}
               company={scholarship.company}
               title={scholarship.title}
@@ -27,6 +31,11 @@ export default function Home(){
           ))}
         </div>
         </section>
+        {showLogin && (
+          <LoginModal
+            onClose={()=>setShowLogin(false)}
+          />
+        )}
         </>
 
     );

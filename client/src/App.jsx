@@ -5,6 +5,7 @@ import Scholarships from "./pages/Scholarships";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScholarshipDetails from "./pages/ScholarshipDetails";
 
+
 function App() {
 
   return (
@@ -19,6 +20,7 @@ function App() {
         path="/scholarships/:id"
         element={<ScholarshipDetails/>}
         />
+
     </Routes>
     </BrowserRouter>
    
