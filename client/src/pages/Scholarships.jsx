@@ -76,7 +76,7 @@ export default function Scholarships() {
 
                      <ScholarshipCard
 
-                        key={scholarship.id}
+                        id={scholarship.id}
 
                         logo={scholarship.logo}
                          company={scholarship.company}

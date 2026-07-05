@@ -2,8 +2,10 @@ import "./ScholarshipCard.css";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaMoneyBillWave } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function ScholarshipCard({
+    id,
     logo,
     company,
     title,
@@ -45,9 +47,9 @@ export default function ScholarshipCard({
                 <span>{deadline}</span>
                </div>
             </div>
-            <button className="apply-btn" >
-                View Details 
-            </button>
+            <Link to={`/scholarships/${id}`} className="apply-btn">
+               View Details
+            </Link>
         </div>
     );
 }

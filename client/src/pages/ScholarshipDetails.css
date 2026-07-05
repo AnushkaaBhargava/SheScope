@@ -1,0 +1,164 @@
+.details-page{
+    padding:70px 80px;
+    background:var(--background);
+     min-height:100vh;
+}
+
+.back-btn{
+
+    text-decoration:none;
+
+    color:var(--primary);
+
+    font-weight:600;
+}
+.details-header{
+
+    margin:30px 0;
+
+}
+
+.company{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    width: fit-content;
+    background:white;
+
+    padding:20px 28px;
+
+    border-radius:18px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.company img{
+
+    width:130px;
+
+    height:130px;
+
+    object-fit:contain;
+
+}
+.company h1{
+
+    margin-bottom:10px;
+
+    font-size:38px;
+
+}
+.company h3{
+
+    color:var(--text-light);
+
+    margin-bottom:10px;
+
+}
+.badge{
+    display:inline-block;
+    background:var(--secondary-light);
+    color:var(--primary);
+    padding:6px 15px;
+    border-radius:20px
+}
+
+.details-container{
+    display:grid;
+    grid-template-columns:3fr 1fr;
+    gap:40px;
+    margin-top:60px
+
+}
+.section-content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    margin-top:20px;
+}
+
+.left section{
+ background:white;
+ padding:30px;
+ border-radius:20px;
+ margin-bottom:30px;
+ box-shadow:0 8px 25px rgba(0,0,0,.08);
+ width:90%
+}
+.left h2{
+    margin-bottom:15px;
+}
+
+.left ul{
+    padding-left:20px;
+    line-height:2
+}
+
+.info-card{
+    background:var(--secondary-light);
+    border-radius:20px;
+    padding:30px;
+
+    width:100%;
+    max-width:320px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:18px;
+}
+
+.info-card h2{
+    margin-top:20px;
+    margin-bottom:20px;
+    font-size:20px
+}
+
+.info-card p{
+
+    margin-bottom:18px;
+
+}
+.apply-btn{
+
+    width:60%;
+
+    margin-top:25px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+.section-content ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.section-content li{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    font-size: 18px;
+}
+
+.check-icon{
+    color: #22c55e;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+

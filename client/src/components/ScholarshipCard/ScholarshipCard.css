@@ -1,6 +1,6 @@
 .card{
     width:310px;
-    height:390px;
+    min-height: 390px;
     background:var(--white);
     border:1px solid var(--border);
     border-radius:16px;
@@ -8,6 +8,8 @@
     margin-left:20px;
     margin-top:20px;
     border-top: 5px solid var(--primary-dark);
+    display:flex;
+    flex-direction:column
 }
 
 .company-info{
@@ -88,10 +90,12 @@
 }
 
 .apply-btn{
-     width:60%;
-    margin-top:30px;
+
+    margin-top:auto;
+
+    width:100%;
+
     padding:14px;
-    margin-left:30px;
 
     border:none;
 
@@ -101,12 +105,17 @@
 
     color:white;
 
+    text-decoration:none;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
     font-size:16px;
 
     font-weight:600;
 
-    cursor:pointer;
-
-    transition:0.3s;
-
+    transition:.3s;
 }
