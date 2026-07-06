@@ -5,6 +5,7 @@ import Scholarships from "./pages/Scholarships";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScholarshipDetails from "./pages/ScholarshipDetails";
 import ApplyScholarship from "./pages/ApplyScholarship";
+import MyApplication from "./components/MyApplication/MyApplication";
 
 
 function App() {
@@ -25,6 +26,11 @@ function App() {
         <Route
         path="/apply/:id"
         element={<ApplyScholarship/>}
+        />
+
+        <Route
+         path="/applications"
+        element={<MyApplication/>}
         />
 
     </Routes>
