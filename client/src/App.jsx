@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScholarshipDetails from "./pages/ScholarshipDetails";
 import ApplyScholarship from "./pages/ApplyScholarship";
 import MyApplication from "./components/MyApplication/MyApplication";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 
 function App() {
@@ -31,6 +32,11 @@ function App() {
         <Route
          path="/applications"
         element={<MyApplication/>}
+        />
+
+        <Route
+         path="/dashboard"
+        element={<Dashboard/>}
         />
 
     </Routes>

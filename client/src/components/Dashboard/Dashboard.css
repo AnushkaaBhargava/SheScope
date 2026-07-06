@@ -1,0 +1,149 @@
+.dashboard{
+    min-height:100vh;
+
+    background:#F8FAFF;
+
+    padding:60px 80px;
+}
+
+.dashboard h1{
+    color:var(--primary);
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#6B7280;
+
+    font-size:18px;
+
+    margin-bottom:40px;
+}
+
+.stats{
+    display :grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    margin-bottom:40px
+}
+
+.stat-card{
+    background:white;
+    border-radius:18px;
+    padding:30px;
+    text-align:center;
+     box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.stat-card h2{
+
+    font-size:38px;
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+
+}
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px
+}
+
+.recent-applications{
+    margin-top:100px;
+    margin-bottom:70px
+}
+
+.recent-applications h2{
+    margin-top:50px
+}
+.recent-card{
+    
+    display:flex;
+    margin-top:30px;
+    align-items:center;
+    gap:80px;
+    padding:20px 0;
+
+    border-bottom:1px solid #E5E7EB;
+
+}
+.deadline-card{
+    margin-top:50px;
+    background:white;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    gap:50px
+
+}
+.left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+.right{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.recent-card h2,
+.deadline-card h2{
+
+    margin-bottom:25px;
+
+}
+
+.recent-item,
+.deadline-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 0;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.deadline-item:last-child,
+.recent-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.recent-logo{
+
+    width:70px;
+
+    height:70px;
+
+    object-fit:contain;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:12px;
+
+    padding:8px;
+
+    background:white;
+
+    flex-shrink:0;
+
+}
