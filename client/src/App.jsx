@@ -7,6 +7,8 @@ import ScholarshipDetails from "./pages/ScholarshipDetails";
 import ApplyScholarship from "./pages/ApplyScholarship";
 import MyApplication from "./components/MyApplication/MyApplication";
 import Dashboard from "./components/Dashboard/Dashboard";
+import SavedScholarships from "./components/SavedScholarships/SavedScholarships";
+import Profile from "./components/Profile/Profile";
 
 
 function App() {
@@ -37,6 +39,17 @@ function App() {
         <Route
          path="/dashboard"
         element={<Dashboard/>}
+        />
+
+        
+        <Route
+         path="/saved"
+        element={<SavedScholarships/>}
+        />
+
+        <Route
+         path="/profile"
+        element={<Profile/>}
         />
 
     </Routes>

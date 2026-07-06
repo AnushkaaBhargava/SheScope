@@ -1,0 +1,203 @@
+.saved-page{
+
+    min-height:100vh;
+
+    background:#F8FAFF;
+
+    padding:60px 20px;
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+.saved-page h1{
+
+    font-size:42px;
+
+    color:var(--primary);
+
+    margin-bottom:12px;
+
+}
+
+.subtitle{
+
+    font-size:18px;
+
+    color:#6B7280;
+
+    margin-bottom:45px;
+
+}
+
+/* ---------- Cards ---------- */
+
+.saved-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:28px;
+
+}
+
+.saved-card{
+
+    background:#F5F9FF;
+
+    border-radius:22px;
+
+    padding:28px 35px;
+
+    display:grid;
+
+    grid-template-columns:90px 1fr 280px;
+
+    align-items:center;
+
+    gap:30px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    width:80%;
+
+    max-width:1200px;
+
+}
+
+.saved-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 18px 40px rgba(59,130,246,.18);
+
+}
+
+/* ---------- Logo ---------- */
+
+.saved-logo{
+
+    width:85px;
+
+    height:85px;
+
+    object-fit:contain;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:16px;
+
+    padding:12px;
+
+    background:white;
+
+}
+
+/* ---------- Middle ---------- */
+
+.saved-info h2{
+
+    font-size:34px;
+
+    margin-bottom:8px;
+
+}
+
+.saved-info h3{
+
+    color:#6B7280;
+
+    font-size:22px;
+
+    margin-bottom:18px;
+
+    font-weight:500;
+
+}
+
+.badge{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:25px;
+
+    background:#DBEAFE;
+
+    color:var(--primary);
+
+    font-weight:600;
+
+}
+
+/* ---------- Right ---------- */
+
+.saved-right{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-end;
+
+    gap:12px;
+
+}
+
+.saved-right p{
+
+    font-size:17px;
+
+    color:#374151;
+
+}
+
+.saved-right strong{
+
+    color:#111827;
+
+}
+
+/* ---------- Button ---------- */
+
+.view-btn{
+
+    margin-top:15px;
+
+    width:210px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.view-btn:hover{
+
+    background:var(--primary-dark);
+
+    transform:translateY(-2px);
+
+}
