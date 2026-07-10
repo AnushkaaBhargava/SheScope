@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import scholarshipRoutes from "./routes/scholarshipRoutes.js";
+import applicationRoutes from "./routes/applicationRoutes.js";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use("/api/login",authRoutes);
 app.use("/api/scholarships",scholarshipRoutes);
 app.use("/api/scholarships",scholarshipRoutes);
 app.use("/api/scholarships/:id",scholarshipRoutes);
+app.use("/api/applications",applicationRoutes);
 
 app.get("/",(req,res)=>{
        res.send("Backend running!");

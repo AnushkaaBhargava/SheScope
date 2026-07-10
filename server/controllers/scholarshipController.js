@@ -53,3 +53,56 @@ export const getScholarshipById=async(req,res)=>{
               });
          }
 }
+
+export const updateScholarship=async (req,res)=>{
+    try{
+
+        const updatedScholarship=await Scholarship.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {returnDocument:"after"}
+        );
+
+        if(!updatedScholarship){
+            res.status(404).json({
+                message:"Scholarship not found!"
+            })
+        }
+
+        res.status(200).json({
+            message:"Scholarship updated successfully!",
+            updatedScholarship
+        })
+
+    }catch(error){
+
+        res.status(500).json({
+            message:error.message
+        });
+
+    }
+};
+
+export const deleteScholarship=async (req,res)=>{
+    try{ 
+
+        const scholarship=await Scholarship.findByIdAndDelete(req.params.id);
+
+        if(!scholarship){
+            res.status(404).json({
+                message:"Scholarship not found!"
+            })
+        }
+
+        res.status(200).json({
+            message:"Scholarship deleted successfully!",
+            scholarship
+        });
+
+    }catch(error){
+         
+         res.status(500).json({
+            message:error.message
+         });
+    }
+}
