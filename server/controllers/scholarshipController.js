@@ -31,3 +31,25 @@ export const createScholarship=  async(req,res)=>{
         });
     }
 }
+
+export const getScholarshipById=async(req,res)=>{
+         
+         try{
+             
+             const scholarship=await Scholarship.findById(req.params.id);
+
+             if(!scholarship){
+                res.status(404).json({
+                    message:"Scholarship not found!"
+                });
+             };
+
+             res.status(200).json(
+                scholarship
+             )
+         }catch(error){
+              res.status(500).json({
+                message:error.message
+              });
+         }
+}

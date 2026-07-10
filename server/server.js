@@ -17,6 +17,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/login",authRoutes);
 app.use("/api/scholarships",scholarshipRoutes);
 app.use("/api/scholarships",scholarshipRoutes);
+app.use("/api/scholarships/:id",scholarshipRoutes);
 
 app.get("/",(req,res)=>{
        res.send("Backend running!");
