@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import scholarshipRoutes from "./routes/scholarshipRoutes.js";
 
 dotenv.config();
 
@@ -14,6 +15,8 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/login",authRoutes);
+app.use("/api/scholarships",scholarshipRoutes);
+app.use("/api/scholarships",scholarshipRoutes);
 
 app.get("/",(req,res)=>{
        res.send("Backend running!");
