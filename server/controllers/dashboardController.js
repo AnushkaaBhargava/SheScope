@@ -24,7 +24,7 @@ export const getDashboard= async (req,res)=>{
 
          const rejectedApplications=await Application.countDocuments({
             student:req.user.id,
-            status:"Rejected"
+            status:"rejected"
          });
 
 
