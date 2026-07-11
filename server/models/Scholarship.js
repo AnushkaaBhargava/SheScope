@@ -34,10 +34,15 @@ const scholarshipSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-      eligibility:{
+    eligibility:[{
         type:String,
         required:true
-    },
+    }],
+
+    requiredDocuments:[{
+    type:String,
+    required:true
+    }],
 
     logo:{
         type:String
