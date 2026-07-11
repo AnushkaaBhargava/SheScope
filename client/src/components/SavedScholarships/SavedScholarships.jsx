@@ -1,9 +1,27 @@
 import "./SavedScholarships.css";
 import Navbar from "../Navbar/Navbar";
-import savedScholarships from "../SavedScholarships/savedScholarshipData";
 import { Link } from "react-router-dom";
+import {useState,useEffect} from "react";
+import api from "../../api/api.js"
 
 export default function SavedScholarships(){
+    
+    const [savedScholarships, setSavedScholarships] = useState([]);
+
+    useEffect(()=>{
+        const savedScholarships=async ()=>{
+            try{
+               
+               const res=await api.get("/saved");
+               setSavedScholarships(res.data.savedScholarships);
+            }catch(error){
+                console.log(error);
+            }
+        };
+
+        savedScholarships();
+    },[]);
+
     return (
         <> 
            <Navbar/>
@@ -14,39 +32,39 @@ export default function SavedScholarships(){
                 </p>
                 <div className="saved-list">
                     {savedScholarships.map((item)=>(
-                        <div className="saved-card" key={item.id}>
+                        <div className="saved-card" key={item._id}>
                              <img
-                               src={item.logo}
-                               alt={item.company}
+                               src={item.scholarship.logo}
+                               alt={item.scholarship.company}
                               className="saved-logo"
                              />
 
                        <div className="saved-info">
 
-                            <h2>{item.title}</h2>
+                            <h2>{item.scholarship.title}</h2>
 
-                            <h3>{item.company}</h3>
+                            <h3>{item.scholarship.company}</h3>
 
                            <span className="badge">
-                               {item.category}
+                               {item.scholarship.category}
                            </span>
 
                       </div>
                              <div className="saved-right">
 
                                 <p>
-                                    <strong>Amount:</strong> {item.amount}
+                                    <strong>Amount:</strong> {item.scholarship.amount}
                                 </p>
 
                                 <p>
-                                    <strong>Country:</strong> {item.country}
+                                    <strong>Country:</strong> {item.scholarship.country}
                                 </p>
 
                                 <p>
-                                    <strong>Deadline:</strong> {item.deadline}
+                                    <strong>Deadline:</strong> {new Date(item.scholarship.deadline).toLocaleDateString()}
                                 </p>
 
-                                <Link to={`/scholarships/${item.id}`}>
+                                <Link to={`/scholarships/${item.scholarship._id}`}>
                                     <button className="view-btn">
                                         View Scholarship
                                     </button>

@@ -1,18 +1,29 @@
 import "./ApplyScholarship.css";
 import Navbar from "../components/Navbar/Navbar";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
-import scholarships from "../components/ScholarshipCard/scholarship";
+import api from "../api/api";
 
 export default function ApplyScholarship(){
 
     const {id}=useParams();
+    const [scholarship, setScholarship] = useState(null);
 
-    const scholarship=scholarships.find(
-        (item)=>item.id===Number(id)
-    );
+    useEffect(()=>{
+        const fetchScholarship=async ()=>{
+              try{
+                 
+                 const res=await api.get(`/scholarships/${id}`)
+                 setScholarship(res.data);
+              }catch(error){
+                  console.log(error);
+              }
+        }
 
-    const [formData,setformData]=useState({
+        fetchScholarship();
+    },[id]);
+
+    const [formData,setFormData]=useState({
         "fullName":"",
         "email":"",
         "phone":"",
@@ -25,29 +36,53 @@ export default function ApplyScholarship(){
     );
 
     function handleChange(e){
-        setformData({
+        setFormData({
             ...formData,
             [e.target.name]:e.target.value
        });
     
 }
 
-function handleSubmit(e){
-     e.preventDefault();
-     console.log(formData);
+const handleSubmit=async(e)=>{
+
+
+    e.preventDefault();
+     
+     try{
+
+        const res=await api.post("/applications",{
+            scholarship:id,
+            sop:formData.sop,
+            resume:""
+        })
 
         alert("Application Submitted Successfully!");
 
         setFormData({
-            fullName: "",
-            email: "",
-            phone: "",
-            college: "",
-            branch: "",
-            year: "",
-            cgpa: "",
-            sop: ""
-        });
+           fullName: "",
+           email: "",
+           phone: "",
+           college: "",
+           branch: "",
+           year: "",
+           cgpa: "",
+           sop: ""
+           });
+
+     }catch(error){
+           console.log(error);
+     }
+
+        
+}
+
+if (!scholarship) {
+    return (
+        <>
+            <Navbar />
+            <h2>Loading...</h2>
+        </>
+    );
 }
 
 return(
@@ -167,7 +202,7 @@ return(
 
                 <p><strong>Country:</strong> {scholarship.country}</p>
 
-                <p><strong>Deadline:</strong> {scholarship.deadline}</p>
+                <p><strong>Deadline:</strong> {new Date(scholarship.deadline).toLocaleDateString()}</p>
 
             </div>
 

@@ -1,10 +1,11 @@
 import Navbar from "../components/Navbar/Navbar";
 import './Scholarships.css'
-import scholarships from '../components/ScholarshipCard/scholarship'
+import { useState, useEffect } from "react";
+import api from "../api/api";
 import ScholarshipCard from "../components/ScholarshipCard/ScholarshipCard"
-import { useState } from "react";
 export default function Scholarships() {
-
+    
+    const [scholarships, setScholarships] = useState([]);
     const [selectedCategory,setSelectedCategory]=useState("All");
     const [selectedCountry, setSelectedCountry] = useState("All");
     const [selectedAmount, setSelectedAmount] = useState("All");
@@ -21,6 +22,24 @@ export default function Scholarships() {
         }
         return true;
     })
+
+    useEffect(()=>{
+        const fetchScholarships=async (req,res)=>{
+             try{
+            
+                const res=await api.get("/scholarships");
+                console.log(res.data);
+              setScholarships(res.data);
+               }catch(error){
+
+                 console.log(error);
+
+        }
+        };
+
+        fetchScholarships();
+      
+    },[]);
 
     return (
 
@@ -75,8 +94,8 @@ export default function Scholarships() {
                 {filteredScholarships.map((scholarship) => (
 
                      <ScholarshipCard
-
-                        id={scholarship.id}
+                        key={scholarship._id}
+                        id={scholarship._id}
 
                         logo={scholarship.logo}
                          company={scholarship.company}
@@ -84,7 +103,7 @@ export default function Scholarships() {
                         category={scholarship.category}
                         amount={scholarship.amount}
                         country={scholarship.country}
-                        deadline={scholarship.deadline}
+                        deadline={new Date(scholarship.deadline).toLocaleDateString()}
 
                     />
 

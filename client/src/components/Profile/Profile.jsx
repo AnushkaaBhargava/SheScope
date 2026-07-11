@@ -1,7 +1,57 @@
 import "./Profile.css";
 import Navbar from "../Navbar/Navbar";
+import { useEffect, useState } from "react";
+import api from "../../api/api";
 
 export default function Profile() {
+
+    const [profile,setProfile]=useState(null);
+    const [isEditing,setIsEditing]=useState(false);
+
+    const handleChange = (e) => {
+    setProfile({
+        ...profile,
+        [e.target.name]: e.target.value
+       });
+    };
+
+    const handleSave=async()=>{
+        try{
+            const res=await api.put("/profile",{
+                name:profile.name,
+                phone:profile.phone,
+                branch:profile.branch,
+                cgpa:profile.cgpa,
+                year:profile.year
+            });
+
+            alert("Profile updated successfully!");
+            setIsEditing(false);
+        }catch(error){
+         alert(error.response?.data?.message || "Something went wrong");
+        }
+    }
+    
+    useEffect(() => {
+
+    const fetchProfile = async () => {
+
+        try {
+
+            const res = await api.get("/profile");
+            console.log(res.data);
+            setProfile(res.data.user);
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    };
+    fetchProfile();
+    }, []);
+
     return (
         <>
             <Navbar />
@@ -23,8 +73,8 @@ export default function Profile() {
                         </div>
 
                         <div>
-                            <h2>Anushkaa Bhargava</h2>
-                            <p>Computer Science Engineering</p>
+                            <h2>{profile?.name}</h2>
+                            <p>{profile?.branch}</p>
                         </div>
 
                     </div>
@@ -35,8 +85,9 @@ export default function Profile() {
                             <label>Full Name</label>
                             <input
                                 type="text"
-                                value="Anushkaa Bhargava"
-                                readOnly
+                                value={profile?.name || ""}
+                                readOnly={!isEditing}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -44,8 +95,9 @@ export default function Profile() {
                             <label>Email</label>
                             <input
                                 type="email"
-                                value="anushkaa@gmail.com"
+                                value={profile?.email || ""}
                                 readOnly
+
                             />
                         </div>
 
@@ -53,8 +105,10 @@ export default function Profile() {
                             <label>Phone</label>
                             <input
                                 type="text"
-                                value="+91 9876543210"
-                                readOnly
+                                name="phone"
+                                value={profile?.phone || ""}
+                                readOnly={!isEditing}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -62,8 +116,10 @@ export default function Profile() {
                             <label>Branch</label>
                             <input
                                 type="text"
-                                value="Computer Science"
-                                readOnly
+                                name="branch"
+                                value={profile?.branch || ""}
+                                readOnly={!isEditing}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -71,8 +127,10 @@ export default function Profile() {
                             <label>Year</label>
                             <input
                                 type="text"
-                                value="3rd Year"
-                                readOnly
+                                name="year"
+                                value={profile?.year || ""}
+                                readOnly={!isEditing}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -80,8 +138,10 @@ export default function Profile() {
                             <label>CGPA</label>
                             <input
                                 type="text"
-                                value="8.9"
-                                readOnly
+                                name="cgpa"
+                                value={profile?.cgpa || ""}
+                                readOnly={!isEditing}
+                                onChange={handleChange}
                             />
                         </div>
 
@@ -108,8 +168,11 @@ export default function Profile() {
 
                     </div>
 
-                    <button className="edit-btn">
-                        Edit Profile
+                    <button
+                     className="edit-btn"
+                     onClick={isEditing ? handleSave : () => setIsEditing(true)}
+                     >
+                      {isEditing ? "Save Profile" : "Edit Profile"}
                     </button>
 
                 </div>

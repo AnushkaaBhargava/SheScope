@@ -1,8 +1,32 @@
 import "./MyApplication.css";
 import Navbar from "../Navbar/Navbar";
-import applications from "../MyApplication/applications";
+import { useEffect, useState } from "react";
+import api from "../../api/api";
+
 
 export default function MyApplication(){
+
+    
+const [applications, setApplications] = useState([]);
+
+useEffect(()=>{
+
+    const fetchApplications=async()=>{
+        try{
+
+            const res=await api.get("/applications/my");
+            console.log(res.data)
+            setApplications(res.data.applications);
+
+        }catch(error){
+            console.log(error);
+        }
+    };
+
+    fetchApplications();
+},[])
+
+
     return(
         <>
          <Navbar/>
@@ -15,37 +39,37 @@ export default function MyApplication(){
             <div className="application-list">
                 {applications.map((item)=>(
                     <div className="application-card"
-                         key={item.id}
+                         key={item._id}
                     >
 
                         <div className="left-section">
 
                                 <img
-                                    src={item.logo}
-                                    alt={item.company}
+                                    src={item.scholarship.logo}
+                                    alt={item.scholarship.company}
                                     className="company-logo"
                                 />
 
                                 <div className="application-info">
 
-                                    <h2>{item.title}</h2>
+                                    <h2>{item.scholarship.title}</h2>
 
-                                    <h3>{item.company}</h3>
+                                    <h3>{item.scholarship.company}</h3>
 
                                     <p>
-                                        <strong>Category:</strong> {item.category}
+                                        <strong>Category:</strong> {item.scholarship.category}
                                     </p>
 
                                     <p>
-                                        <strong>Amount:</strong> {item.amount}
+                                        <strong>Amount:</strong> {item.scholarship.amount}
                                     </p>
 
                                     <p>
-                                        <strong>Country:</strong> {item.country}
+                                        <strong>Country:</strong> {item.scholarship.country}
                                     </p>
 
                                     <p>
-                                        <strong>Applied On:</strong> {item.appliedDate}
+                                        <strong>Applied On:</strong> {new Date(item.createdAt).toLocaleDateString()}
                                     </p>
 
                                 </div>

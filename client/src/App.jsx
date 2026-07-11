@@ -9,6 +9,7 @@ import MyApplication from "./components/MyApplication/MyApplication";
 import Dashboard from "./components/Dashboard/Dashboard";
 import SavedScholarships from "./components/SavedScholarships/SavedScholarships";
 import Profile from "./components/Profile/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 function App() {
@@ -27,29 +28,50 @@ function App() {
         />
 
         <Route
-        path="/apply/:id"
-        element={<ApplyScholarship/>}
+              path="/apply/:id"
+           element={
+           <ProtectedRoute>
+            <ApplyScholarship />
+           </ProtectedRoute>
+         }
         />
 
-        <Route
-         path="/applications"
-        element={<MyApplication/>}
-        />
+         <Route
+           path="/applications"
+           element={
+           <ProtectedRoute>
+            <MyApplication />
+          </ProtectedRoute>
+           }
+          />
 
         <Route
          path="/dashboard"
-        element={<Dashboard/>}
+        element={
+          <ProtectedRoute>
+            <Dashboard/>
+          </ProtectedRoute>
+        
+        }
         />
 
         
         <Route
          path="/saved"
-        element={<SavedScholarships/>}
+        element={
+           <ProtectedRoute>
+            <SavedScholarships/>
+          </ProtectedRoute>
+        }
         />
 
         <Route
          path="/profile"
-        element={<Profile/>}
+        element={
+           <ProtectedRoute>
+            <Profile/>
+          </ProtectedRoute>
+        }
         />
 
     </Routes>

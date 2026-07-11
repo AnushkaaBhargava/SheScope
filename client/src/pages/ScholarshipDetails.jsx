@@ -1,14 +1,50 @@
 import {Link,useParams} from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
-import scholarships from "../components/ScholarshipCard/scholarship";
 import "./ScholarshipDetails.css";
+import { useEffect, useState } from "react";
+import api from "../api/api";
 import { FaCheckCircle } from "react-icons/fa";
 
 export default function ScholarshipDetails(){
 
     const {id}=useParams();
 
-    const scholarship=scholarships.find((item)=>item.id===Number(id));
+    const [scholarship,setScholarship]=useState(null);
+
+    useEffect(()=>{
+        const fetchScholarship=async (req,res)=>{
+
+            try{
+                
+                const res=await api.get(`/scholarships/${id}`);
+                setScholarship(res.data);
+            }
+            catch(error){
+                 console.log(error);
+            }
+        };
+
+        fetchScholarship();
+    },[]);
+
+   
+    const handleSave = async () => {
+
+    try {
+
+        await api.post("/saved", {
+            scholarship: scholarship._id
+        });
+
+        alert("Scholarship saved successfully!");
+
+    } catch (error) {
+
+        alert(error.response?.data?.message || "Something went wrong");
+
+    }
+
+};
 
       if (!scholarship) {
         return (
@@ -43,6 +79,8 @@ export default function ScholarshipDetails(){
                             {scholarship.category}
                         </span>
                     </div>
+
+                    
                 </div>
 
             </div>
@@ -54,50 +92,45 @@ export default function ScholarshipDetails(){
                             <h2>About this Scholarship</h2>
 
                             <p>
-                                This scholarship supports talented women pursuing
-                                higher education in STEM fields. It aims to
-                                encourage innovation and empower future leaders.
+                               {scholarship.description}
                             </p>
 
                     </section>
 
                      <section>
-                      <h2>Eligibility</h2>
+                       <h2>Eligibility</h2>
 
-                      <div className="section-content">
-                    <ul>
-                       <li><FaCheckCircle className="check-icon" /> Female students</li>
-                       <li><FaCheckCircle className="check-icon" /> Undergraduate degree</li>
-                    </ul>
+                    <div className="section-content">
+                     <ul>
+                        {scholarship.eligibility.map((item, index) => (
+                       <li key={index}>
+                       <FaCheckCircle className="check-icon" />
+                    {item}
+                </li>
+            ))}
+        </ul>
 
-                    <ul>
-                       <li><FaCheckCircle className="check-icon" /> Minimum CGPA 8.0</li>
-                       <li><FaCheckCircle className="check-icon" /> Passionate about technology</li>
-                   </ul>
-                 </div>
-                 </section>
+    </div>
+</section>
                          <section>
+                       <h2>Required Documents</h2>
 
-                            <h2>Required Documents</h2>
-                          <div className="section-content">
-                            <ul>
-
-                                <li><FaCheckCircle className="check-icon" />Resume</li>
-
-                                <li><FaCheckCircle className="check-icon" />Latest Marksheet</li>
-                            </ul>
-                            <ul>
-                                <li><FaCheckCircle className="check-icon" />Government ID</li>
-
-                                <li><FaCheckCircle className="check-icon" />Income Certificate</li>
-
-                            </ul>
-                          </div>
-                        </section>
+                    <div className="section-content">
+                     <ul>
+                        {scholarship.requiredDocuments.map((item, index) => (
+                       <li key={index}>
+                       <FaCheckCircle className="check-icon" />
+                    {item}
+                </li>
+            ))}
+        </ul>
+    </div>
+</section>
                 </div>
+                
                  <div className="right">
-
-                        <div className="info-card">
+                  
+                    <div className="info-card">
 
                             <h2>Quick Information</h2>
 
@@ -105,11 +138,21 @@ export default function ScholarshipDetails(){
 
                             <p><strong>Country:</strong> {scholarship.country}</p>
 
-                            <p><strong>Deadline:</strong> {scholarship.deadline}</p>
+                            <p>
+                              <strong>Deadline:</strong>{" "}
+                              {new Date(scholarship.deadline).toLocaleDateString()}
+                            </p>
 
                             <Link to={`/apply/${id}`} className="apply-btn">
                                 Apply Now!
                              </Link>
+
+                             <button
+                             className="save-btn"
+                             onClick={handleSave}
+                                >
+                             ❤️ Save Scholarship
+                            </button>
 
                         </div>
 
