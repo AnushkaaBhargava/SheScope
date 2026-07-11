@@ -1,13 +1,30 @@
 import "./Dashboard.css";
 import Navbar from "../Navbar/Navbar";
-import applications from "../MyApplication/applications";
+import { useEffect, useState } from "react";
+import api from "../../api/api";
 
 export default function Dashboard(){
 
-    const totalapplications=applications.length;
+    const [dashboard,setDashboard]=useState(null);
 
-    const accepted=applications.filter((item)=>item.status==="Accepted").length;
-    const underReview=applications.filter((item)=>item.status==="Under Review").length;
+    useEffect(()=>{
+
+        const fetchDashboard= async()=>{
+              try{
+
+            const res=await api.get("/dashboard");
+            console.log(res.data);
+            setDashboard(res.data);
+
+        }catch(error){
+            console.log(error);
+        }
+
+        };
+
+        fetchDashboard();
+      
+    },[]);
 
     return(
         <>
@@ -19,13 +36,13 @@ export default function Dashboard(){
             </p>
             <div className="stats">
                 <div className="stat-card">
-                    <h2>{totalapplications}</h2>
+                    <h2>{dashboard?.totalApplications}</h2>
                     <p>Total Applications</p>
                 </div>
 
                 <div className="stat-card">
 
-                    <h2>{accepted}</h2>
+                    <h2>{dashboard?.acceptedApplications}</h2>
 
                     <p>Accepted</p>
 
@@ -33,14 +50,14 @@ export default function Dashboard(){
 
                   <div className="stat-card">
 
-                        <h2>{underReview}</h2>
+                        <h2>{dashboard?.pendingApplications}</h2>
 
                         <p>Under Review</p>
 
                 </div>
             </div>
 
-            <div className="recent-applications">
+            {/* <div className="recent-applications">
                  <h2>Recent Applications</h2>
                  {applications.map((item=>(
                    <div className="recent-card">
@@ -75,9 +92,9 @@ export default function Dashboard(){
 
            </div>
                  )))}
-            </div>
+            </div> */}
 
-               <div className="deadline-card">
+               {/* <div className="deadline-card">
 
                     <h2>Upcoming Deadlines</h2>
 
@@ -96,7 +113,7 @@ export default function Dashboard(){
 
                     ))}
 
-                </div>
+                </div> */}
           </div>
         </>
     )
