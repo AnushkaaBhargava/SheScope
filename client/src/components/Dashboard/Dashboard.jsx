@@ -78,9 +78,9 @@ export default function Dashboard(){
 
                 <div>
 
-                    <h3>{item.scholarship.title}</h3>
+                    <h3>{item.scholarship?.title}</h3>
 
-                    <p>{item.scholarship.company}</p>
+                    <p>{item.scholarship?.company}</p>
 
                     <small>
                         Applied:

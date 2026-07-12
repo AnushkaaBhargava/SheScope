@@ -45,27 +45,27 @@ useEffect(()=>{
                         <div className="left-section">
 
                                 <img
-                                    src={item.scholarship.logo}
-                                    alt={item.scholarship.company}
+                                    src={item.scholarship?.logo}
+                                    alt={item.scholarship?.company}
                                     className="company-logo"
                                 />
 
                                 <div className="application-info">
 
-                                    <h2>{item.scholarship.title}</h2>
+                                    <h2>{item.scholarship?.title}</h2>
 
-                                    <h3>{item.scholarship.company}</h3>
+                                    <h3>{item.scholarship?.company}</h3>
 
                                     <p>
-                                        <strong>Category:</strong> {item.scholarship.category}
+                                        <strong>Category:</strong> {item.scholarship?.category}
                                     </p>
 
                                     <p>
-                                        <strong>Amount:</strong> {item.scholarship.amount}
+                                        <strong>Amount:</strong> {item.scholarship?.amount}
                                     </p>
 
                                     <p>
-                                        <strong>Country:</strong> {item.scholarship.country}
+                                        <strong>Country:</strong> {item.scholarship?.country}
                                     </p>
 
                                     <p>

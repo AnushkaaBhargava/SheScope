@@ -31,50 +31,72 @@ export default function SavedScholarships(){
                     Scholarships you've bookmarked for later.
                 </p>
                 <div className="saved-list">
-                    {savedScholarships.map((item)=>(
-                        <div className="saved-card" key={item._id}>
-                             <img
-                               src={item.scholarship.logo}
-                               alt={item.scholarship.company}
-                              className="saved-logo"
-                             />
 
-                       <div className="saved-info">
+    {savedScholarships.length === 0 ? (
 
-                            <h2>{item.scholarship.title}</h2>
+        <div className="empty-state">
+            <h2>No saved scholarships yet!</h2>
+            <p>Browse scholarships and save your favorites to view them here.</p>
 
-                            <h3>{item.scholarship.company}</h3>
+            <Link to="/scholarships">
+                <button className="view-btn">
+                    Browse Scholarships
+                </button>
+            </Link>
+        </div>
 
-                           <span className="badge">
-                               {item.scholarship.category}
-                           </span>
+    ) : (
 
-                      </div>
-                             <div className="saved-right">
+        savedScholarships.map((item) => (
+            <div className="saved-card" key={item._id}>
 
-                                <p>
-                                    <strong>Amount:</strong> {item.scholarship.amount}
-                                </p>
+                <img
+                    src={item.scholarship?.logo}
+                    alt={item.scholarship?.company}
+                    className="saved-logo"
+                />
 
-                                <p>
-                                    <strong>Country:</strong> {item.scholarship.country}
-                                </p>
+                <div className="saved-info">
 
-                                <p>
-                                    <strong>Deadline:</strong> {new Date(item.scholarship.deadline).toLocaleDateString()}
-                                </p>
+                    <h2>{item.scholarship?.title}</h2>
 
-                                <Link to={`/scholarships/${item.scholarship._id}`}>
-                                    <button className="view-btn">
-                                        View Scholarship
-                                    </button>
-                                </Link>
+                    <h3>{item.scholarship?.company}</h3>
 
-                            </div>
+                    <span className="badge">
+                        {item.scholarship?.category}
+                    </span>
 
-                        </div>
-                    ))}
                 </div>
+
+                <div className="saved-right">
+
+                    <p><strong>Amount:</strong> {item.scholarship?.amount}</p>
+
+                    <p><strong>Country:</strong> {item.scholarship?.country}</p>
+
+                    <p>
+                        <strong>Deadline:</strong>{" "}
+                        {item.scholarship
+                            ? new Date(item.scholarship.deadline).toLocaleDateString()
+                            : "N/A"}
+                    </p>
+
+                    {item.scholarship && (
+                        <Link to={`/scholarships/${item.scholarship._id}`}>
+                            <button className="view-btn">
+                                View Scholarship
+                            </button>
+                        </Link>
+                    )}
+
+                </div>
+
+            </div>
+        ))
+
+    )}
+
+</div>
            </div>
 
         </>

@@ -201,3 +201,21 @@
     transform:translateY(-2px);
 
 }
+
+.empty-state{
+    text-align:center;
+    padding:80px 20px;
+    background:white;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.empty-state h2{
+    color:var(--primary);
+    margin-bottom:15px;
+}
+
+.empty-state p{
+    color:#6B7280;
+    margin-bottom:25px;
+}
