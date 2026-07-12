@@ -86,3 +86,34 @@ export const uploadProfilePicture = async (req, res) => {
         });
     }
 };
+
+export const uploadResume = async (req, res) => {
+    try {
+
+        console.log("REQ.FILE:");
+        console.log(req.file);
+
+        const user = await User.findById(req.user.id);
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        user.resume = req.file.path;
+
+        await user.save();
+
+        res.status(200).json({
+            message: "Resume uploaded successfully!",
+            resume: user.resume
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
