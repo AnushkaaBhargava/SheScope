@@ -6,6 +6,7 @@ import api from "../../api/api";
 export default function Dashboard(){
 
     const [dashboard,setDashboard]=useState(null);
+    const [applications,setApplications]=useState([]);
 
     useEffect(()=>{
 
@@ -13,8 +14,10 @@ export default function Dashboard(){
               try{
 
             const res=await api.get("/dashboard");
-            console.log(res.data);
             setDashboard(res.data);
+
+            const appRes=await api.get("/applications/my")
+            setApplications(appRes.data.applications);
 
         }catch(error){
             console.log(error);
@@ -32,7 +35,7 @@ export default function Dashboard(){
           <div className="dashboard">
             <h1>Dashboard</h1>
             <p className="subtitle">
-                    Welcome back! Here's an overview of your scholarship journey.
+                Welcome back! Here's an overview of your scholarship journey. 👋
             </p>
             <div className="stats">
                 <div className="stat-card">
@@ -56,64 +59,50 @@ export default function Dashboard(){
 
                 </div>
             </div>
+               <div className="recent-applications">
 
-            {/* <div className="recent-applications">
-                 <h2>Recent Applications</h2>
-                 {applications.map((item=>(
-                   <div className="recent-card">
+    <h2>Recent Applications</h2>
 
-                    <div className="left">
+    {applications.length === 0 ? (
 
-                              <img
-                                src={item.logo}
-                               alt={item.company}
-                                className="recent-logo"
-                                />
+        <p>No applications yet.</p>
 
-                       <div>
+    ) : (
 
-                         <h3>{item.title}</h3>
+        applications.slice(0, 3).map((item) => (
 
-                         <p>{item.company}</p>
+            <div
+                className="recent-card"
+                key={item._id}
+            >
 
-                       <small>Applied: {item.appliedDate}</small>
+                <div>
 
-                      </div>
+                    <h3>{item.scholarship.title}</h3>
 
-                  </div>
+                    <p>{item.scholarship.company}</p>
 
-                  <span
-                      className={`status ${item.status
-                       .toLowerCase()
-                       .replace(/\s/g, "-")}`}
-                    >
-                   {item.status}
-                   </span>
+                    <small>
+                        Applied:
+                        {" "}
+                        {new Date(item.createdAt).toLocaleDateString()}
+                    </small>
 
-           </div>
-                 )))}
-            </div> */}
+                </div>
 
-               {/* <div className="deadline-card">
+                <span
+                    className={`status ${item.status.toLowerCase()}`}
+                >
+                    {item.status}
+                </span>
 
-                    <h2>Upcoming Deadlines</h2>
+            </div>
 
-                    {applications.map((item) => (
+        ))
 
-                        <div
-                            className="deadline-item"
-                            key={item.id}
-                        >
+    )}
 
-                            <span>{item.title}</span>
-
-                            <strong>{item.deadline}</strong>
-
-                        </div>
-
-                    ))}
-
-                </div> */}
+</div>
           </div>
         </>
     )

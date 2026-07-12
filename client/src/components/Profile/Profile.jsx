@@ -69,7 +69,11 @@ export default function Profile() {
                     <div className="profile-header">
 
                         <div className="profile-image">
-                            👩
+                            <img
+                             src={profile?.profilePic}
+                             alt="Profile"
+                            className="profile-image"
+                         />
                         </div>
 
                         <div>

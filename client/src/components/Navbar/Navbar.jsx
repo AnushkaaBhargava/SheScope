@@ -17,25 +17,40 @@ export default function Navbar({onLoginClick}){
             <h2 className="logo">She Scope</h2>
 
             <div className="nav-links">
-                <Link to="/">Home</Link>
-                <Link to="/scholarships">Scholarships</Link>
-                <a href="#">About</a>
-                {token? (
-                    <button 
-                      className="login-btn"
-                      onClick={handleLogout}
 
-                    >
-                        Logout
-                    </button>
-                ): <button
-                   className="login-btn"
-                   onClick={onLoginClick}
-                   >
-                    Login
-                    </button>}
-           
-            </div>
+           <Link to="/">Home</Link>
+
+          <Link to="/scholarships">Scholarships</Link>
+
+         {token && (
+               <>
+                <Link to="/dashboard">Dashboard</Link>
+
+                <Link to="/saved">Saved</Link>
+
+                <Link to="/applications">Applications</Link>
+
+                <Link to="/profile">Profile</Link>
+           </>
+        )}
+
+       {token ? (
+            <button
+              className="login-btn"
+              onClick={handleLogout}
+             >
+            Logout
+          </button>
+        ) : (
+          <button
+            className="login-btn"
+            onClick={onLoginClick}
+          >
+            Login
+        </button>
+    )}
+
+</div>
         </nav>
     )
 }
