@@ -15,22 +15,29 @@ export const getAllScholarships= async(req,res)=>{
     }
 };
 
-export const createScholarship=  async(req,res)=>{
-    try{
-      
-      const scholarship=await Scholarship.create(req.body);
+export const createScholarship = async (req, res) => {
+    try {
 
-      res.status(201).json({
-        message:"Scholarship created successfully!"
-      });
-    }
-    catch(error){
-           
+        const logo = req.file ? req.file.path : "";
+
+        const scholarship = await Scholarship.create({
+            ...req.body,
+            logo,
+        });
+
+        res.status(201).json({
+            message: "Scholarship created successfully!",
+            scholarship
+        });
+
+    } catch (error) {
+
         res.status(500).json({
             message: error.message
         });
+
     }
-}
+};
 
 export const getScholarshipById=async(req,res)=>{
          
