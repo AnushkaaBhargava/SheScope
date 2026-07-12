@@ -6,7 +6,9 @@ import api from "../../api/api";
 export default function Profile() {
 
     const [profile,setProfile]=useState(null);
+    const [profilePic, setProfilePic]=useState(null);
     const [isEditing,setIsEditing]=useState(false);
+    const [resume, setResume] = useState(null);
 
     const handleChange = (e) => {
     setProfile({
@@ -29,6 +31,64 @@ export default function Profile() {
             setIsEditing(false);
         }catch(error){
          alert(error.response?.data?.message || "Something went wrong");
+        }
+    }
+
+    const handleProfileUpload=async ()=>{
+
+        if(!profilePic){
+            alert("Please select an image");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("profilePic", profilePic);
+
+        try{
+             
+             const res=await api.put("/profile/profile-picture",
+                formData
+             );
+
+             setProfile({
+                ...profile,
+                profilePic:res.data.profilePic
+             });
+
+             alert("Profile picture uploaded!");
+        }catch(error){
+
+
+        alert(error.response?.data?.message || "Upload failed");
+
+        }
+    }
+
+    const handleResumeUpload=async()=>{
+
+        if(!resume){
+            alert("Please select a resume");
+            return;
+        }
+
+          const formData = new FormData();
+         formData.append("resume", resume);
+
+        try{
+
+            const res=await api.put("/profile/resume",
+                formData
+            )
+
+            setProfile({
+                ...profile,
+                resume:res.data.resume
+            })
+
+            alert("Resume uploaded successfully!");
+
+        }catch(error){
+               alert(error.response?.data?.message || "Upload failed");
         }
     }
     
@@ -67,14 +127,38 @@ export default function Profile() {
                 <div className="profile-card">
 
                     <div className="profile-header">
+                          <div className="profile-image-container">
 
-                        <div className="profile-image">
-                            <img
-                             src={profile?.profilePic}
-                             alt="Profile"
-                            className="profile-image"
-                         />
-                        </div>
+    <img
+        src={profile?.profilePic || "/default-avatar.png"}
+        alt="Profile"
+        className="profile-image"
+    />
+
+    <label htmlFor="profile-upload" className="change-photo-btn">
+        📷 Change Photo
+    </label>
+
+    <input
+        id="profile-upload"
+        type="file"
+        accept="image/*"
+        hidden
+        onChange={(e) => {
+            setProfilePic(e.target.files[0]);
+        }}
+    />
+
+    {profilePic && (
+        <button
+            className="upload-btn"
+            onClick={handleProfileUpload}
+        >
+            Upload
+        </button>
+    )}
+
+</div>
 
                         <div>
                             <h2>{profile?.name}</h2>
@@ -155,9 +239,50 @@ export default function Profile() {
 
                         <h3>Resume</h3>
 
-                        <button className="resume-btn">
-                            Upload Resume
-                        </button>
+                       {profile?.resume ?(
+                        <div className="resume-actions">
+                            <a 
+                            href={profile.resume}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="view-resume">
+                                 📄 View Resume
+                            </a>
+
+                        </div>
+                       ):(
+                        <p>No resume uploaded yet!</p>
+                       )}
+
+                        <label
+                        htmlFor="resume-upload"
+                        className="resume-btn"
+                          >
+                      Choose Resume
+                      </label>
+
+                        <input
+        id="resume-upload"
+        type="file"
+        accept=".pdf"
+        hidden
+        onChange={(e) => setResume(e.target.files[0])}
+    />
+
+    {resume && (
+        <>
+            <p className="selected-file">
+                {resume.name}
+            </p>
+
+            <button
+                className="upload-btn"
+                onClick={handleResumeUpload}
+            >
+                Upload Resume
+            </button>
+        </>
+    )}
 
                     </div>
 
