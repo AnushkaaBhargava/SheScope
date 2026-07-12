@@ -10,7 +10,9 @@ import profileRoutes from "./routes/profileRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 dotenv.config();
-
+console.log("Cloud Name:", process.env.CLOUDINARY_CLOUD_NAME);
+console.log(JSON.stringify(process.env.CLOUDINARY_API_KEY));
+console.log("API Secret exists:", !!process.env.CLOUDINARY_API_SECRET);
 const app=express();
 connectDB();
 app.use(cors());
@@ -27,9 +29,22 @@ app.use("/api/saved",savedScholarshipRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/dashboard",dashboardRoutes);
 
+app.use((err, req, res, next) => {
+    console.error("GLOBAL ERROR");
+    console.error(err);
+
+    res.status(500).json({
+        message: err.message,
+        name: err.name,
+        stack: err.stack,
+    });
+});
+
 app.get("/",(req,res)=>{
        res.send("Backend running!");
 })
+
+
 
 const port=process.env.PORT || 5000;
 

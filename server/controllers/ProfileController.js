@@ -58,3 +58,31 @@ export const updateProfile=async (req,res)=>{
           });
     };
 }
+
+export const uploadProfilePicture = async (req, res) => {
+    try {
+        console.log("req.file:", req.file);
+        console.log("req.user:", req.user);
+
+        const user = await User.findById(req.user.id);
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        user.profilePic = req.file.path;
+
+        await user.save();
+
+        res.json({
+            message: "Uploaded successfully",
+            profilePic: user.profilePic
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
