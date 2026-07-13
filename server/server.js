@@ -8,6 +8,7 @@ import applicationRoutes from "./routes/applicationRoutes.js";
 import savedScholarshipRoutes from "./routes/savedScholarshipRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
+import path from "path";
 
 dotenv.config();
 console.log("Cloud Name:", process.env.CLOUDINARY_CLOUD_NAME);
@@ -18,6 +19,7 @@ connectDB();
 app.use(cors());
 
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/login",authRoutes);

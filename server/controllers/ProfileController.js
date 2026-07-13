@@ -101,7 +101,7 @@ export const uploadResume = async (req, res) => {
             });
         }
 
-        user.resume = req.file.path;
+        user.resume = user.resume = `/uploads/resumes/${req.file.filename}`;
 
         await user.save();
 

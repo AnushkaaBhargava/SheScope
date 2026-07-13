@@ -1,17 +1,32 @@
 import multer from "multer";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
-import cloudinary from "../config/cloudinary.js";
+import path from "path";
 
-const storage = new CloudinaryStorage({
-    cloudinary,
-    params: async (req, file) => ({
-        folder: "SheScope/resumes",
-        resource_type: "raw",
-        use_filename: true,
-        unique_filename: false
-    })
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/resumes");
+    },
+
+    filename: (req, file, cb) => {
+        const uniqueName =
+            Date.now() + path.extname(file.originalname);
+
+        cb(null, uniqueName);
+    }
 });
 
-const resumeUpload = multer({ storage });
+const fileFilter = (req, file, cb) => {
+
+    if (file.mimetype === "application/pdf") {
+        cb(null, true);
+    } else {
+        cb(new Error("Only PDF files are allowed!"), false);
+    }
+
+};
+
+const resumeUpload = multer({
+    storage,
+    fileFilter
+});
 
 export default resumeUpload;
