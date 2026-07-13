@@ -1,6 +1,13 @@
 import "./Hero.css";
+import { useNavigate } from "react-router-dom";
+import { useState,useEffect } from "react";
+
 
 export default function Hero() {
+
+    const [search, setSearch] = useState("");
+
+    const navigate = useNavigate();
     return (
         <div className="hero">
 
@@ -18,9 +25,14 @@ export default function Hero() {
                     <input
                         type="text"
                         placeholder="Search scholarships..."
+                        value={search}
+                        onChange={(e)=>{setSearch(e.target.value)}}
                     />
 
-                    <button>Search</button>
+                    <button
+                      onClick={()=>navigate(`/scholarships?search=${search}`)}
+                    
+                    >Search</button>
                 </div>
 
             </div>

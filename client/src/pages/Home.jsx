@@ -6,11 +6,13 @@ import './Home.css'
 import { useState,useEffect } from "react";
 import LoginModal from "../components/LoginModal/LoginModal";
 import api from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 export default function Home(){
 
     const [showLogin,setShowLogin]=useState(false);
     const [scholarships,setScholarships]=useState([]);
+    
 
     useEffect(()=>{
       const fetchScholarships=async()=>{

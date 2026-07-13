@@ -2,7 +2,9 @@ import Navbar from "../components/Navbar/Navbar";
 import './Scholarships.css'
 import { useState, useEffect } from "react";
 import api from "../api/api";
-import ScholarshipCard from "../components/ScholarshipCard/ScholarshipCard"
+import ScholarshipCard from "../components/ScholarshipCard/ScholarshipCard";
+import { useSearchParams } from "react-router-dom";
+
 export default function Scholarships() {
     
     const [scholarships, setScholarships] = useState([]);
@@ -10,7 +12,18 @@ export default function Scholarships() {
     const [selectedCountry, setSelectedCountry] = useState("All");
     const [selectedAmount, setSelectedAmount] = useState("All");
 
+    const [searchParams] = useSearchParams();
+
+    const search = searchParams.get("search") || "";
+
     const filteredScholarships=scholarships.filter((scholarship)=>{
+
+        const matchesSearch =
+        scholarship.title.toLowerCase().includes(search.toLowerCase()) ||
+        scholarship.company.toLowerCase().includes(search.toLowerCase()) ||
+        scholarship.category.toLowerCase().includes(search.toLowerCase());
+
+        if (!matchesSearch) return false;
         if(selectedCategory!=="All" && selectedCategory!==scholarship.category){
             return false;
         }

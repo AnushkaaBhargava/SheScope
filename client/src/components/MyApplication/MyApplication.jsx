@@ -31,11 +31,28 @@ useEffect(()=>{
         <>
          <Navbar/>
          <div className="application">
-             <h1>My Applications</h1>
+              <div className="application-header">
 
-                <p className="subtitle">
-                    Track the progress of all your scholarship applications.
-                </p>
+    <div className="application-left">
+
+        <h1>My Applications</h1>
+
+        <p className="subtitle">
+            Track the progress of all your scholarship applications.
+        </p>
+
+    </div>
+
+    <div className="application-right">
+
+        <img
+            src="/applications.svg"
+            alt="Applications Illustration"
+        />
+
+    </div>
+
+</div>
             <div className="application-list">
                 {applications.map((item)=>(
                     <div className="application-card"

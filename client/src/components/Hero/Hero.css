@@ -1,25 +1,26 @@
 .hero{
     display:flex;
-    justify-content:space-between;
+    justify-content:center;
     align-items:center;
-    gap:60px;
-    
-    padding:50px 8%;
+    gap:20px;          /* was 60px */
+    padding:10px 6%;   /* slightly smaller side padding */
 }
 
 .hero-left{
-    flex:1;
+    flex:1.2;
 }
 
 .hero-right{
-    flex:1;
-    display:flex;
-    justify-content:center;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero-right img{
-    width:100%;
-    max-width:600px;
+    width: 750px;      /* Increase this */
+    max-width: none;   /* Remove the limit */
+    height: auto;
 }
 
 .hero h1{

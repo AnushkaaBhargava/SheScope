@@ -26,10 +26,28 @@ export default function SavedScholarships(){
         <> 
            <Navbar/>
            <div className="saved-page">
-               <h1>Saved Scholarships</h1>
-                  <p className="subtitle">
-                    Scholarships you've bookmarked for later.
-                </p>
+               <div className="saved-header">
+
+    <div className="saved-left">
+
+        <h1>Saved Scholarships</h1>
+
+        <p className="subtitle">
+            Scholarships you've bookmarked for later.
+        </p>
+
+    </div>
+
+    <div className="saved-right-image">
+
+        <img
+            src="/saved.svg"   // your illustration
+            alt="Saved Scholarships"
+        />
+
+    </div>
+
+</div>
                 <div className="saved-list">
 
     {savedScholarships.length === 0 ? (

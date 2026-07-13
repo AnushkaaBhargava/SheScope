@@ -1,11 +1,13 @@
 .featured{
-    padding:20px 80px 60px;
+    max-width:1400px;
+    margin:0 auto;
+    padding:60px 40px;
 }
 
 .featured h2{
-    margin-top:10px;
-    margin-left:100px;
-    margin-bottom:50px;
+    margin-left:260px;   /* increase until it aligns with the cards */
+    font-size:30px;
+    color:var(--primary);
 }
 
 .cards{

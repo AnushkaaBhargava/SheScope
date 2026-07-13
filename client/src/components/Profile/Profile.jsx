@@ -118,11 +118,28 @@ export default function Profile() {
 
             <div className="profile-page">
 
-                <h1>My Profile</h1>
+                 <div className="profile-header-section">
 
-                <p className="subtitle">
-                    Manage your personal information and academic details.
-                </p>
+    <div className="profile-title">
+
+        <h1>My Profile</h1>
+
+        <p className="subtitle">
+            Manage your personal information and academic details.
+        </p>
+
+    </div>
+
+    <div className="profile-hero-image">
+
+        <img
+            src="/profile.svg"   // your illustration
+            alt="Profile"
+        />
+
+    </div>
+
+</div>
 
                 <div className="profile-card">
 
