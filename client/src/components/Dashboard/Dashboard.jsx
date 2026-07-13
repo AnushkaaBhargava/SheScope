@@ -33,10 +33,28 @@ export default function Dashboard(){
         <>
           <Navbar/>
           <div className="dashboard">
-            <h1>Dashboard</h1>
-            <p className="subtitle">
-                Welcome back! Here's an overview of your scholarship journey. 👋
-            </p>
+              <div className="dashboard-header">
+
+    <div className="dashboard-left">
+
+        <h1>Dashboard</h1>
+
+        <p className="subtitle">
+            Welcome back! Here's an overview of your scholarship journey. 👋
+        </p>
+
+    </div>
+
+    <div className="dashboard-right">
+
+        <img
+            src="/dashboard.svg"
+            alt="Dashboard Illustration"
+        />
+
+    </div>
+
+</div>
             <div className="stats">
                 <div className="stat-card">
                     <h2>{dashboard?.totalApplications}</h2>

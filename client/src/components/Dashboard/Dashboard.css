@@ -6,6 +6,42 @@
     padding:60px 80px;
 }
 
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+    margin-bottom:40px;
+}
+
+.dashboard-left{
+    flex:1.5;
+}
+
+.dashboard-right{
+    flex:1;
+    display:flex;
+}
+
+.dashboard-left h1{
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 56px;
+    color: var(--primary);
+}
+
+.dashboard-left .subtitle{
+    text-align: center;
+    max-width: 650px;
+    line-height: 1.6;
+    margin-left:100px;
+}
+
+.dashboard-right img{
+    width:100%;
+    max-width:320px;
+}
+
 .dashboard h1{
     color:var(--primary);
     font-size:40px;

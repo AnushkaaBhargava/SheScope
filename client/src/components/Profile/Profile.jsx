@@ -242,7 +242,7 @@ export default function Profile() {
                        {profile?.resume ?(
                         <div className="resume-actions">
                             <a 
-                            href={profile.resume}
+                            href={`http://localhost:5000${profile.resume}`}
                             target="_blank"
                             rel="noreferrer"
                             className="view-resume">
